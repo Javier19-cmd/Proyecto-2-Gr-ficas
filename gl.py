@@ -9,6 +9,8 @@ from material import *
 from light import *
 from color import *
 from plane import *
+from lado import *
+from frente import *
 
 c1 = Raytracer() #Instancia de la clase Raytracer.
 c2 = Envmap() #Instancia de la clase Envmap.
@@ -124,7 +126,9 @@ def escena():
         Sphere(V3(1, -2.2,-12), 0.8, sil),
         Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Plane(V3(0, 0.5, -6), 2, 2, glass)
+        Plane(V3(0, 0.5, -6), 2, 2, mirror),
+        Lado(V3(1, 0.5, -6), 2, 2, sil),
+        Frente(V3(1, 0.5, -6), 2, 2, sil),
 
     ]
 
