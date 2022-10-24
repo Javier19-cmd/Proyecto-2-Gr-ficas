@@ -12,14 +12,14 @@ class Frente(object):
     def ray_intersect(self, orig, direction): #Método para la intersección.
         d = -(orig.z + self.center.z) / direction.z #Calculando la distancia. 
         impact = orig + (direction * d)
-        normal = V3(1, 0, 0)
+        normal = V3(0, 0, 1)
 
 
         if d <= 0 or \
-            impact.y > (self.center.y + self.w/2) or \
-            impact.y < (self.center.y - self.w/2) or \
-            impact.x > (self.center.x + self.l/2) or \
-            impact.x < (self.center.x - self.l/2): #Detectando la no colisión.
+            impact.x > (self.center.x + self.w/2) or \
+            impact.x < (self.center.x - self.w/2) or \
+            impact.y > (self.center.y + self.l/2) or \
+            impact.y < (self.center.y - self.l/2): #Detectando la no colisión.
             return None
     
         return Intersect(

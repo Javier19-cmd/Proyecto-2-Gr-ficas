@@ -126,9 +126,9 @@ def escena():
         Sphere(V3(1, -2.2,-12), 0.8, sil),
         Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Plane(V3(0, 0.5, -6), 2, 2, mirror),
+        Plane(V3(0, 0.5, -6), 2, 2, sil),
         Lado(V3(1, 0.5, -6), 2, 2, sil),
-        Frente(V3(1, 0.5, -6), 2, 2, sil),
+        Lado(V3(-1, 0.5, -6), 2, 2, sil),
 
     ]
 
