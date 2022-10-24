@@ -44,3 +44,11 @@ class Envmap(object):
             c[1],
             c[2]
         )
+
+    def load(self, path):
+        self.read(path)
+
+        self.width = self.width
+        self.height = self.height
+
+        return self.pixels

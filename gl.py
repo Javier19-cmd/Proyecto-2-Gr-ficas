@@ -1,4 +1,5 @@
 from code import interact
+from envmap import Envmap
 from ray import *
 from utilidades import *
 from math import *
@@ -10,6 +11,7 @@ from color import *
 from plane import *
 
 c1 = Raytracer() #Instancia de la clase Raytracer.
+c2 = Envmap() #Instancia de la clase Envmap.
 
 
 def glCreateWindow(width, height): #Función para crear la ventana.
@@ -122,7 +124,7 @@ def escena():
         Sphere(V3(1, -2.2,-12), 0.8, sil),
         Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Plane(V3(0, 0.5, -6), 2, 2, brown)
+        Plane(V3(0, 0.5, -6), 2, 2, glass)
 
     ]
 
@@ -130,10 +132,15 @@ def escena():
 
 def envmap(path): #Setter del envmap.
     c1.envmap = path
+    c2.read(c1.envmap)
+    print(c2.width, c2.height)
 
 def get_background(direction):
     if c1.envmap:
-        return c1.envmap.get_color(direction)
+        c2.get_color(direction)
+        #print(len(c2.pixels))
+        c1.framebuffer = c2.pixels
+        #return c2.get_color(direction) #Retornando el color del envmap.
     else:
         return color(0, 0, 0)
 
@@ -253,12 +260,21 @@ def refract(I, N, roi):
 
     #return (I - (N * 2 * (N @ I))).normalice()
 
+def carga(path):
+    c2.load(path)
+
+    print(c2.pixels)
+    c1.framebuffer = c2.pixels
+
+
 #Función para la intersección.
 def scene_intersect(orig, direction):
     #Revisa todos los objetos de la escena y regresa el material del objeto con el que chocó.
     zBuffer = 999999 #Se crea el zBuffer. 
     material = None #Se crea el material.
     intersect = None #Se crea la intersección.
+    #print(direction)
+    #get_background(direction) #Dibujando el fondo de la escena.
 
     for o in c1.scene: #Recorriendo el array de esferas.
         object_intersect = o.ray_intersect(orig, direction) #Llamando al método para el rayo.
@@ -268,6 +284,8 @@ def scene_intersect(orig, direction):
                 zBuffer = object_intersect.distance
                 material = o.material
                 intersect = object_intersect
+                #get_background(direction) #Dibujando el fondo de la escena.
+                #print(direction)
     
     return material, intersect #Regresando el color de la esfera.
 
@@ -285,6 +303,7 @@ def finish():
             direction = (V3(i, j, -1)).normalice()
 
             c = cast_ray(origin, direction) #Llamando al método para el rayo.
+            #get_background(direction) #Dibujando el fondo de la escena.
         
             point(x, y, c) #Pintando un punto con el color que se recibe después del cast_ray.
     c1.write()
