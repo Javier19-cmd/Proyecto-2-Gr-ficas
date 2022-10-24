@@ -11,6 +11,7 @@ from color import *
 from plane import *
 from lado import *
 from frente import *
+from square import *
 
 c1 = Raytracer() #Instancia de la clase Raytracer.
 c2 = Envmap() #Instancia de la clase Envmap.
@@ -118,6 +119,13 @@ def escena():
 
     glass = Material(diffuse=color(255, 255, 255), albedo=[0, 0.5, 0.1, 0.0], spec=125, refractive_index=1.5) # Vidrio.
     
+    #Creando listas para el cuadrado.
+    #Primer cuadrado.
+    arriba = [V3(0, 0.5, -6), 2, 2]
+    izquierda = [V3(1, 0.5, -6), 2, 2]
+    derecha = [V3(-1, 0.5, -6), 2, 2]
+    abajo = [V3(0, -1.5, -6), 2, 2]
+
     #Creando esferas.
     c1.scene = [
 
@@ -126,10 +134,7 @@ def escena():
         Sphere(V3(1, -2.2,-12), 0.8, sil),
         Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Plane(V3(0, 0.5, -6), 2, 2, sil),
-        Lado(V3(1, 0.5, -6), 2, 2, sil),
-        Lado(V3(-1, 0.5, -6), 2, 2, sil),
-
+        Square(arriba, izquierda, derecha, abajo, sil)
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
