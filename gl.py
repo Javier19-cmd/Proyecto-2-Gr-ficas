@@ -135,11 +135,21 @@ def escena():
         Sphere(V3(1, -2.2,-12), 0.8, sil),
         Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Square(arriba, izquierda, derecha, abajo, frente, sil)
+        #Square(arriba, izquierda, derecha, abajo, frente, sil)
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
 
+def envmap2(path): #Setter del envmap.
+
+
+    c2.load(path) #Leyendo el archivo.
+
+    #print(c1.framebuffer)
+
+    c1.framebuffer = c2.pixels #Guardando los pixeles del archivo en el framebuffer.
+
+    #print(c1.framebuffer)
 def envmap(path): #Setter del envmap.
     c1.envmap = path
     c2.read(c1.envmap)
@@ -147,24 +157,31 @@ def envmap(path): #Setter del envmap.
 
 def get_background(direction):
     if c1.envmap:
-        c2.get_color(direction)
-        #print(len(c2.pixels))
-        c1.framebuffer = c2.pixels
-        #return c2.get_color(direction) #Retornando el color del envmap.
+        return c2.get_color(direction)
     else:
         return color(0, 0, 0)
+
+# def get_background():
+#     if c1.envmap:
+#         #c2.get_color(direction)
+#         #print(len(c2.pixels))
+#         c1.framebuffer = c2.pixels
+#         print("No se pintó")
+#         #return c2.get_color(direction) #Retornando el color del envmap.
+#     else:
+#         return color(0, 0, 0)
 
 def cast_ray(orig, direction, recursion=0): #Método para el rayo.
     #Revisa contra que chocó y en base a eso regresa un material.
 
     #Se verifica si no se ha pasado del máximo de recursiones.
     if recursion >= c1.max_recursion_depth:
-        return c1.color_fondo #Asigna el color de fondo.
+        return get_background(direction) #Asigna el color de fondo.
     
     material, intersect = scene_intersect(orig, direction) #Llamando a la función para la intersección.
 
     if material is None: #Si no hay material, entonces se regresa el color de fondo.
-        return c1.color_fondo
+        return get_background(direction)
 
     light_dir = (c1.light.position - intersect.point).normalice() #Llamando al método para la luz.
 
@@ -269,13 +286,6 @@ def refract(I, N, roi):
     return ((I * eta) + (N * (eta * cosi - cost))).normalice() #Regresando el vector de la reflexión.
 
     #return (I - (N * 2 * (N @ I))).normalice()
-
-def carga(path):
-    c2.load(path)
-
-    print(c2.pixels)
-    c1.framebuffer = c2.pixels
-
 
 #Función para la intersección.
 def scene_intersect(orig, direction):

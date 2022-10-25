@@ -7,7 +7,7 @@ class Raytracer(object):
     width  = 0 
     height = 0
     #Variable para el framebuffer.
-    framebuffer = 0 
+    framebuffer = [] 
 
     #Variable para guardar el color del fondo.
     color_fondo = 0
@@ -28,7 +28,7 @@ class Raytracer(object):
     light = None
 
     #Máximo de recursión.
-    max_recursion_depth = 5
+    max_recursion_depth = 3
 
     #Variable para guardar el envmap.
     envmap = None 
