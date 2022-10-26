@@ -3,11 +3,11 @@
 from vector import *
 from intersect import *
 from plane import *
-from frente import *
+from atras import *
 from lado import *
 
 class Square(object):
-    def __init__(self, arriba, izquierda, derecha, abajo, frente, material):
+    def __init__(self, arriba, izquierda, derecha, abajo, atras, material):
         
         self.material = material #Material del cuadrado.
         
@@ -34,23 +34,23 @@ class Square(object):
         self.l_abajo = abajo[2]
 
         #Parte frontal del cuadrado.
-        self.center_frente = frente[0]
-        self.w_frente = frente[1]
-        self.l_frente = frente[2]
+        self.center_frente = atras[0]
+        self.w_frente = atras[1]
+        self.l_frente = atras[2]
 
 
         self.arriba = Plane(arriba[0], arriba[1], arriba[2], material)
         self.izquierda = Lado(izquierda[0], izquierda[1], izquierda[2], material)
         self.derecha = Lado(derecha[0], derecha[1], derecha[2], material)
         self.abajo = Plane(abajo[0], abajo[1], abajo[2], material)
-        self.frente = Frente(frente[0], frente[1], frente[2], material)
+        self.atras = Atras(atras[0], atras[1], atras[2], material)
 
     def ray_intersect(self, orig, direction): #Método para la intersección.
         arriba = self.arriba.ray_intersect(orig, direction)
         izquierda = self.izquierda.ray_intersect(orig, direction)
         derecha = self.derecha.ray_intersect(orig, direction)
         abajo = self.abajo.ray_intersect(orig, direction)
-        frente = self.frente.ray_intersect(orig, direction)
+        atras = self.atras.ray_intersect(orig, direction)
 
         if arriba: #Detectando la colisión de arriba del cuadrado.
             #print("Arriba: ", arriba)
@@ -65,7 +65,7 @@ class Square(object):
             return abajo
         else: #Detectando la colisión de frente del cuadrado.
             #print("Frente: ", frente)
-            return frente
+            return atras
             
         # if izquierda: #Detectando la colisión de la izquierda del cuadrado.
         #     print("Izquierda: ", izquierda)

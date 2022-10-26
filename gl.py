@@ -10,7 +10,7 @@ from light import *
 from color import *
 from plane import *
 from lado import *
-from frente import *
+from atras import *
 from square import *
 from prueba import *
 
@@ -126,7 +126,7 @@ def escena():
     izquierda = [V3(1, 0.5, -6), 2, 2]
     derecha = [V3(-1, 0.5, -6), 2, 2]
     abajo = [V3(0, -1.5, -6), 2, 2]
-    frente = [V3(0, 1, -6), 2, 2]
+    atras = [V3(0, 0.5, -6), 2, 2]
 
     #Creando esferas.
     c1.scene = [
@@ -137,7 +137,7 @@ def escena():
         # Sphere(V3(-2, -2.2,-12), 0.8, mirror),
         # Sphere(V3(2.5, -2.2,-12), 0.8, glass),
         #Plane(V3(0, 0.5, -6), 2, 2, mirror),
-        Square(arriba, izquierda, derecha, abajo, frente, sil)
+        Square(arriba, izquierda, derecha, abajo, atras, sil)
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
