@@ -1,5 +1,6 @@
 #Clase para crear todos los lados del cuadrado.
 
+from adelante import Adelante
 from vector import *
 from intersect import *
 from plane import *
@@ -7,7 +8,7 @@ from atras import *
 from lado import *
 
 class Square(object):
-    def __init__(self, arriba, izquierda, derecha, abajo, atras, material):
+    def __init__(self, arriba, izquierda, derecha, abajo, atras, adelante, material):
         
         self.material = material #Material del cuadrado.
         
@@ -33,10 +34,15 @@ class Square(object):
         self.w_abajo = abajo[1]
         self.l_abajo = abajo[2]
 
+        #Parte trasera del cuadrado.
+        self.center_atras = atras[0]
+        self.w_atras = atras[1]
+        self.l_atras = atras[2]
+
         #Parte frontal del cuadrado.
-        self.center_frente = atras[0]
-        self.w_frente = atras[1]
-        self.l_frente = atras[2]
+        self.center_adelante = adelante[0]
+        self.w_adelante = adelante[1]
+        self.l_adelante = adelante[2]
 
 
         self.arriba = Plane(arriba[0], arriba[1], arriba[2], material)
@@ -44,6 +50,7 @@ class Square(object):
         self.derecha = Lado(derecha[0], derecha[1], derecha[2], material)
         self.abajo = Plane(abajo[0], abajo[1], abajo[2], material)
         self.atras = Atras(atras[0], atras[1], atras[2], material)
+        self.adelante = Adelante(adelante[0], adelante[1], adelante[2], material)
 
     def ray_intersect(self, orig, direction): #Método para la intersección.
         arriba = self.arriba.ray_intersect(orig, direction)
@@ -51,6 +58,7 @@ class Square(object):
         derecha = self.derecha.ray_intersect(orig, direction)
         abajo = self.abajo.ray_intersect(orig, direction)
         atras = self.atras.ray_intersect(orig, direction)
+        adelante = self.adelante.ray_intersect(orig, direction)
 
         if arriba: #Detectando la colisión de arriba del cuadrado.
             #print("Arriba: ", arriba)
@@ -63,9 +71,11 @@ class Square(object):
             return derecha
         elif abajo: #Detectando la colisión de abajo del cuadrado.
             return abajo
-        else: #Detectando la colisión de frente del cuadrado.
+        elif atras: #Detectando la colisión de frente del cuadrado.
             #print("Frente: ", frente)
             return atras
+        else: #Detectando la colisión de adelante.
+            return adelante
             
         # if izquierda: #Detectando la colisión de la izquierda del cuadrado.
         #     print("Izquierda: ", izquierda)

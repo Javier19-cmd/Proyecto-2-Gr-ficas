@@ -4,11 +4,11 @@ from material import * #Archivo de material.
 from ray import * #Archivo de rayo.
 
 def main(): 
-    glCreateWindow(1920, 1280)  
+    glCreateWindow(1280, 680)  
     glClearColor(212, 175, 55) 
     glClear() 
     #glColor(255, 0, 0)
-    envmap("./Fondo.bmp") #Cargar imagen de fondo.
+    envmap("./Nat.bmp") #Cargar imagen de fondo.
     #Cargando el fondo.
     #get_background()
     #Creando array para las esferas.

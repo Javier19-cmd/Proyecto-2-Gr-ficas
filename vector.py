@@ -48,7 +48,7 @@ class V3(object):
             )
 
         #Producto cruz entre dos vectores. Este funciona en vectores de tres dimensiones. Funciona solamente si hay dos vectores usando el *.
-        return (
+        return V3(
             self.y * other.z - self.z * other.y,
             self.z * other.x - self.x * other.z,
             self.x * other.y - self.y * other.x
@@ -62,7 +62,8 @@ class V3(object):
         try: #Si el vector no es cero, entonces normaliza.
             return self * (1 / self.len())
         except: #Si el vector es cero, entonces devuelve un vector cero.
-            return V3(-1, -1, -1)
+            #return V3(-1, -1, -1)
+            return V3(0, 0, 0)
 
     def __repr__(self): #Overloading de la funcion __repr__
         #Devuelve una cadena que representa el objeto.

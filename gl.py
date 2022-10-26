@@ -1,4 +1,3 @@
-from code import interact
 from envmap import Envmap
 from ray import *
 from utilidades import *
@@ -13,6 +12,7 @@ from lado import *
 from atras import *
 from square import *
 from prueba import *
+from triangulo import *
 
 c1 = Raytracer() #Instancia de la clase Raytracer.
 c2 = Envmap() #Instancia de la clase Envmap.
@@ -127,17 +127,13 @@ def escena():
     derecha = [V3(-1, 0.5, -6), 2, 2]
     abajo = [V3(0, -1.5, -6), 2, 2]
     atras = [V3(0, 0.5, -6), 2, 2]
+    adelante = [V3(0, 0.5, -5), 2, 2]
 
     #Creando esferas.
     c1.scene = [
 
-        #Esferas de aluminio.
-        # Sphere(V3(-0.5, -2.2,-12), 0.8, al),
-        # Sphere(V3(1, -2.2,-12), 0.8, sil),
-        # Sphere(V3(-2, -2.2,-12), 0.8, mirror),
-        # Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        #Plane(V3(0, 0.5, -6), 2, 2, mirror),
-        Square(arriba, izquierda, derecha, abajo, atras, sil)
+        #Creando triangulo.
+        Triangle(V3(0.7, -0.4, -1), V3(1, -0.5, -1), V3(0.5, -0.9, -1), brown),
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
@@ -162,16 +158,6 @@ def get_background(direction):
         return c2.get_color(direction)
     else:
         return color(0, 0, 0)
-
-# def get_background():
-#     if c1.envmap:
-#         #c2.get_color(direction)
-#         #print(len(c2.pixels))
-#         c1.framebuffer = c2.pixels
-#         print("No se pintó")
-#         #return c2.get_color(direction) #Retornando el color del envmap.
-#     else:
-#         return color(0, 0, 0)
 
 def cast_ray(orig, direction, recursion=0): #Método para el rayo.
     #Revisa contra que chocó y en base a eso regresa un material.
@@ -204,7 +190,7 @@ def cast_ray(orig, direction, recursion=0): #Método para el rayo.
         reversion_dir = direction * -1 #Se invierte el rayo.
         reflect_dir = reflect(reversion_dir, intersect.normal) #Se calcula el rayo reflejado.
         reflection_bias = -0.8 if reflect_dir @ intersect.normal < 0 else 0.8 #Se calcula el bias.
-        reflect_orig = intersect.point - (intersect.normal * reflection_bias) #Se calcula el origen del rayo reflejado.
+        reflect_orig = intersect.point + (intersect.normal * reflection_bias) #Se calcula el origen del rayo reflejado.
         reflect_col = cast_ray(reflect_orig, reflect_dir, recursion + 1) #Se calcula el color del rayo reflejado.
     else: #Si no tiene reflexión.
         reflect_col = color(0, 0, 0)
@@ -216,7 +202,7 @@ def cast_ray(orig, direction, recursion=0): #Método para el rayo.
     if material.albedo[3] > 0: #Si el material tiene reflexión.
         refract_dir = refract(direction, intersect.normal, material.refractive_index) #Se calcula el rayo reflejado.
         refract_bias = -0.8 if refract_dir @ intersect.normal < 0 else 0.8 #Se calcula el bias.
-        refract_orig = intersect.point - (intersect.normal * refract_bias) #Se calcula el origen del rayo reflejado.
+        refract_orig = intersect.point + (intersect.normal * refract_bias) #Se calcula el origen del rayo reflejado.
         refract_col = cast_ray(refract_orig, refract_dir, recursion + 1) #Se calcula el color del rayo reflejado.
     else: #Si no tiene reflexión.
         refract_col = color(0, 0, 0)
@@ -274,11 +260,11 @@ def refract(I, N, roi):
         cosi = -cosi
         eati = -eati
         etat = -etat
-        N = N * -1
+        N = -N
 
     eta = etai/etat #Calculando la razón de eta.
 
-    k = 1 - eta**2 * (1 - cosi**2) #Calculando k.
+    k = (1 - eta**2) * (1 - cosi**2) #Calculando k.
 
     if k < 0: #Si k es menor a 0.
         return V3(0, 0, 0)
