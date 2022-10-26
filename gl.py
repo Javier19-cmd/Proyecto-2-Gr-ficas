@@ -110,9 +110,9 @@ def escena():
     sil = Material(diffuse=color(0, 128, 0), albedo=[0.6, 0.3, 0.1, 0], spec=50) #Silicón.
 
     #Colores para los osos.
-    brown = Material(diffuse=color(139, 69, 19), albedo=[1, 0, 0.6, 0], spec=80) #Marrón.
+    brown = Material(diffuse=color(139, 69, 19), albedo=[1, 0.2, 0.6, 0.1], spec=80, refractive_index=1.1) #Marrón.
     #brown = Material(diffuse=color(139, 69, 19)) #Marrón.
-    white = Material(diffuse=color(255, 250, 250), albedo=[1, 0, 0, 0], spec=5) #Blanco.
+    white = Material(diffuse=color(255, 250, 250), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Blanco.
     
     mat = Material(diffuse=color(212, 175, 55), albedo=[0.5, 0.1, 0.4, 0], spec=10)
 
@@ -133,6 +133,7 @@ def escena():
     c1.scene = [
 
         #Creando triangulo.
+        Sphere(V3(0.3, 0.2, -2), 0.2, white),
         Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.4, -1), V3(0.2, 0.2, -1), brown),
     ]
 
@@ -190,7 +191,7 @@ def cast_ray(orig, direction, recursion=0): #Método para el rayo.
         reversion_dir = direction * -1 #Se invierte el rayo.
         reflect_dir = reflect(reversion_dir, intersect.normal) #Se calcula el rayo reflejado.
         reflection_bias = -0.8 if reflect_dir @ intersect.normal < 0 else 0.8 #Se calcula el bias.
-        reflect_orig = intersect.point + (intersect.normal * reflection_bias) #Se calcula el origen del rayo reflejado.
+        reflect_orig = intersect.point - (intersect.normal * reflection_bias) #Se calcula el origen del rayo reflejado.
         reflect_col = cast_ray(reflect_orig, reflect_dir, recursion + 1) #Se calcula el color del rayo reflejado.
     else: #Si no tiene reflexión.
         reflect_col = color(0, 0, 0)
@@ -202,7 +203,7 @@ def cast_ray(orig, direction, recursion=0): #Método para el rayo.
     if material.albedo[3] > 0: #Si el material tiene reflexión.
         refract_dir = refract(direction, intersect.normal, material.refractive_index) #Se calcula el rayo reflejado.
         refract_bias = -0.8 if refract_dir @ intersect.normal < 0 else 0.8 #Se calcula el bias.
-        refract_orig = intersect.point + (intersect.normal * refract_bias) #Se calcula el origen del rayo reflejado.
+        refract_orig = intersect.point - (intersect.normal * refract_bias) #Se calcula el origen del rayo reflejado.
         refract_col = cast_ray(refract_orig, refract_dir, recursion + 1) #Se calcula el color del rayo reflejado.
     else: #Si no tiene reflexión.
         refract_col = color(0, 0, 0)
@@ -258,10 +259,11 @@ def refract(I, N, roi):
 
     if cosi < 0: #Si el coseno es menor a 0.
         cosi = -cosi
-        eati = -eati
+        etai = -etai
         etat = -etat
-        N = -N
+        N = N * - 1
 
+    #print(etai, etat)
     eta = etai/etat #Calculando la razón de eta.
 
     k = (1 - eta**2) * (1 - cosi**2) #Calculando k.

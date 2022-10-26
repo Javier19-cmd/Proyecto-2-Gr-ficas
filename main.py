@@ -8,7 +8,7 @@ def main():
     glClearColor(212, 175, 55) 
     glClear() 
     #glColor(255, 0, 0)
-    envmap("./Gris.bmp") #Cargar imagen de fondo.
+    envmap("./Nat.bmp") #Cargar imagen de fondo.
     #Cargando el fondo.
     #get_background()
     #Creando array para las esferas.
