@@ -64,6 +64,7 @@ class Square(object):
         elif abajo: #Detectando la colisión de abajo del cuadrado.
             return abajo
         else: #Detectando la colisión de frente del cuadrado.
+            #print("Frente: ", frente)
             return frente
             
         # if izquierda: #Detectando la colisión de la izquierda del cuadrado.

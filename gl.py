@@ -12,6 +12,7 @@ from plane import *
 from lado import *
 from frente import *
 from square import *
+from prueba import *
 
 c1 = Raytracer() #Instancia de la clase Raytracer.
 c2 = Envmap() #Instancia de la clase Envmap.
@@ -125,18 +126,18 @@ def escena():
     izquierda = [V3(1, 0.5, -6), 2, 2]
     derecha = [V3(-1, 0.5, -6), 2, 2]
     abajo = [V3(0, -1.5, -6), 2, 2]
-    frente = [V3(0, 2, -4), 2, 2]
+    frente = [V3(0, 1, -6), 2, 2]
 
     #Creando esferas.
     c1.scene = [
 
         #Esferas de aluminio.
-        Sphere(V3(-0.5, -2.2,-12), 0.8, al),
-        Sphere(V3(1, -2.2,-12), 0.8, sil),
-        Sphere(V3(-2, -2.2,-12), 0.8, mirror),
-        Sphere(V3(2.5, -2.2,-12), 0.8, glass),
-        Plane(V3(0, 0.5, -6), 2, 2, mirror),
-        #Square(arriba, izquierda, derecha, abajo, frente, sil)
+        # Sphere(V3(-0.5, -2.2,-12), 0.8, al),
+        # Sphere(V3(1, -2.2,-12), 0.8, sil),
+        # Sphere(V3(-2, -2.2,-12), 0.8, mirror),
+        # Sphere(V3(2.5, -2.2,-12), 0.8, glass),
+        #Plane(V3(0, 0.5, -6), 2, 2, mirror),
+        Square(arriba, izquierda, derecha, abajo, frente, sil)
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.

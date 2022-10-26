@@ -10,10 +10,9 @@ class Frente(object):
         self.material = material
 
     def ray_intersect(self, orig, direction): #Método para la intersección.
-        d = -(orig.z + self.center.z) / direction.z #Calculando la distancia. 
+        d = (orig.z + self.center.z) / direction.z #Calculando la distancia. 
         impact = orig + (direction * d)
-        normal = V3(0, 0, 1)
-
+        normal = V3(1, 0, 0)
 
         if d <= 0 or \
             impact.x > (self.center.x + self.w/2) or \
