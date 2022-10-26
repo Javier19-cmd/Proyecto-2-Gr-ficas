@@ -133,7 +133,7 @@ def escena():
     c1.scene = [
 
         #Creando triangulo.
-        Sphere(V3(0.3, 0.2, -2), 0.2, white),
+        Sphere(V3(-0.5, -2.2,-6), 0.4, white),
         Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.4, -1), V3(0.2, 0.2, -1), brown),
     ]
 
