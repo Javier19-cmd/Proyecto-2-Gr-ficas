@@ -133,7 +133,7 @@ def escena():
     c1.scene = [
 
         #Creando triangulo.
-        Triangle(V3(0.7, -0.4, -1), V3(1, -0.5, -1), V3(0.5, -0.9, -1), brown),
+        Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.4, -1), V3(0.2, 0.2, -1), brown),
     ]
 
     c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
