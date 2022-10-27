@@ -114,6 +114,9 @@ def escena():
     #brown = Material(diffuse=color(139, 69, 19)) #Marrón.
     white = Material(diffuse=color(255, 250, 250), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Blanco.
     
+    red = Material(diffuse=color(255, 0, 0), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Rojo.
+
+
     mat = Material(diffuse=color(212, 175, 55), albedo=[0.5, 0.1, 0.4, 0], spec=10)
 
     mirror = Material(diffuse=color(255, 255, 255), albedo=[0, 1, 0.8, 0], spec=1425) # Espejo.
@@ -133,7 +136,7 @@ def escena():
     c1.scene = [
 
         #Creando triangulo.
-        Sphere(V3(-0.5, -2.2,-6), 0.4, white),
+        Sphere(V3(-0.5, -2.2,-6), 0.4, red),
         Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.4, -1), V3(0.2, 0.2, -1), brown),
     ]
 
