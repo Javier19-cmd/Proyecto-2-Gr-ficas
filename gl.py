@@ -150,7 +150,7 @@ def escena():
         
         #Creando el tercer helado.
         Sphere(V3(0.7, 0.3,-7), 0.4, white),
-        Triangle(V3(0.2, 0.1, -1), V3(0.2, 0.3, -1), V3(0.1, 0.1, -1), brown),
+        Triangle(V3(0.1, 0.1, -1), V3(0.1, 0.3, -1), V3(0, 0.1, -1), brown),
     ]
 
     c1.light = Light(V3(0, 1, 0), 1, color(255, 255, 255)) #Creando la luz.
