@@ -1,3 +1,4 @@
+from re import purge
 from envmap import Envmap
 from ray import *
 from utilidades import *
@@ -110,11 +111,15 @@ def escena():
     sil = Material(diffuse=color(0, 128, 0), albedo=[0.6, 0.3, 0.1, 0], spec=50) #Silicón.
 
     #Colores para los osos.
-    brown = Material(diffuse=color(139, 69, 19), albedo=[1, 0.2, 0.6, 0.1], spec=80, refractive_index=1.1) #Marrón.
+    brown = Material(diffuse=color(139, 69, 19), albedo=[1, 0.2, 0.2, 0.3], spec=10, refractive_index=1.1) #Marrón.
     #brown = Material(diffuse=color(139, 69, 19)) #Marrón.
     white = Material(diffuse=color(255, 250, 250), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Blanco.
     
     red = Material(diffuse=color(255, 0, 0), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Rojo.
+
+    morado = Material(diffuse=color(128, 0, 128), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Morado.
+
+    rosa = Material(diffuse=color(255, 192, 203), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Rosa.
 
 
     mat = Material(diffuse=color(212, 175, 55), albedo=[0.5, 0.1, 0.4, 0], spec=10)
@@ -135,12 +140,21 @@ def escena():
     #Creando esferas.
     c1.scene = [
 
-        #Creando triangulo.
-        Sphere(V3(-0.5, -2.2,-6), 0.4, red),
-        Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.4, -1), V3(0.2, 0.2, -1), brown),
+        #Crenado el primer helado.
+        Sphere(V3(3, 0.1,-7), 0.4, morado),
+        Triangle(V3(0.45, 0.1, -1), V3(0.45, 0.3, -1), V3(0.35, -0.000000000001, -1), brown),
+        
+        #Crenado el segundo helado.
+        Sphere(V3(2, 0.2,-7), 0.4, rosa),
+        Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.3, -1), V3(0.2, -0.0000000000000000000000001, -1), brown),
+        
+        #Creando el tercer helado.
+        Sphere(V3(0.7, 0.3,-7), 0.4, white),
+        Triangle(V3(0.2, 0.1, -1), V3(0.2, 0.3, -1), V3(0.1, 0.1, -1), brown),
     ]
 
-    c1.light = Light(V3(0, 3, 0), 1, color(255, 255, 255)) #Creando la luz.
+    c1.light = Light(V3(0, 1, 0), 1, color(255, 255, 255)) #Creando la luz.
+
 
 def envmap2(path): #Setter del envmap.
 
