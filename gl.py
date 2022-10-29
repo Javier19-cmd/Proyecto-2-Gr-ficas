@@ -121,6 +121,8 @@ def escena():
 
     rosa = Material(diffuse=color(255, 192, 203), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Rosa.
 
+    yellow = Material(diffuse=color(255, 180, 0), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Amarillo.
+
 
     mat = Material(diffuse=color(212, 175, 55), albedo=[0.5, 0.1, 0.4, 0], spec=10)
 
@@ -149,8 +151,12 @@ def escena():
         Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.3, -1), V3(0.2, -0.0000000000000000000000001, -1), brown),
         
         #Creando el tercer helado.
-        Sphere(V3(0.7, 0.3,-7), 0.4, white),
-        Triangle(V3(0.1, 0.1, -1), V3(0.1, 0.3, -1), V3(0, 0.1, -1), brown),
+        Sphere(V3(1.1, 0.45,-7), 0.4, white),
+        Triangle(V3(0.1, 0.1, -1), V3(0.1, 0.3, -1), V3(0.2, 0.15, -1), brown),
+
+        #Creando el cuarto helado.
+        Sphere(V3(0.15, 0.3,-7), 0.4, yellow),
+        Triangle(V3(-0.1, 0.2, -1), V3(0, 0.4, -1), V3(0.01, 0.15, -1), brown),
     ]
 
     c1.light = Light(V3(0, 1, 0), 1, color(255, 255, 255)) #Creando la luz.
