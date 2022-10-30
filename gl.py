@@ -145,24 +145,24 @@ def escena():
     c1.scene = [
 
         #Crenado el primer helado.
-        Sphere(V3(3, 0.1,-7), 0.4, morado),
-        Triangle(V3(0.45, 0.1, -1), V3(0.45, 0.3, -1), V3(0.35, -0.000000000001, -1), brown),
+        Sphere(V3(2.4, 0.1,-7), 0.4, morado),
+        Triangle(V3(0.37, 0.1, -1), V3(0.37, 0.3, -1), V3(0.27, -0.000000000001, -1), brown),
         
         #Crenado el segundo helado.
-        Sphere(V3(2, 0.2,-7), 0.4, rosa),
-        Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.3, -1), V3(0.2, -0.0000000000000000000000001, -1), brown),
+        Sphere(V3(1.35, 0.2,-7), 0.4, rosa),
+        Triangle(V3(0.22, 0.1, -1), V3(0.22, 0.3, -1), V3(0.12, -0.0000000000000000000000001, -1), brown),
         
         #Creando el tercer helado.
-        Sphere(V3(1.1, 0.5,-7), 0.4, white),
-        Triangle(V3(0.1, 0.1, -1), V3(0.1, 0.3, -1), V3(0.2, 0.15, -1), brown),
+        Sphere(V3(0.5, 0.7,-7), 0.4, white),
+        Triangle(V3(0, 0.1, -1), V3(0, 0.3, -1), V3(0.1, 0.15, -1), brown),
 
         #Creando el cuarto helado.
-        Sphere(V3(0.3, -0.3,-7), 0.4, yellow),
-        Triangle(V3(0, 0, -1), V3(0, 0.25, -1), V3(0.1, -0.001, -1), brown),
+        Sphere(V3(-0.4, -0.3,-7), 0.4, yellow),
+        Triangle(V3(-0.1, 0, -1), V3(-0.1, 0.25, -1), V3(0, -0.001, -1), brown),
 
         #Creando el quinto helado.
-        Sphere(V3(-0.6, 0.7,-7), 0.4, light_green),
-        Triangle(V3(-0.1, 0.1, -1), V3(-0.1, 0.4, -1), V3(-0.2, 0.15, -1), brown),
+        Sphere(V3(-1.5, 0.7,-7), 0.4, light_green),
+        Triangle(V3(-0.15, 0.1, -1), V3(-0.15, 0.4, -1), V3(-0.25, 0.15, -1), brown),
 
         #Creando el sexto helado.
         Sphere(V3(-2.5, 0.4,-7), 0.4, red),
