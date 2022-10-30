@@ -123,6 +123,8 @@ def escena():
 
     yellow = Material(diffuse=color(255, 180, 0), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Amarillo.
 
+    light_green = Material(diffuse=color(173, 232, 191), albedo=[1, 0, 0, 0], spec=5, refractive_index=1.2) #Verde claro.
+
 
     mat = Material(diffuse=color(212, 175, 55), albedo=[0.5, 0.1, 0.4, 0], spec=10)
 
@@ -151,12 +153,20 @@ def escena():
         Triangle(V3(0.3, 0.1, -1), V3(0.3, 0.3, -1), V3(0.2, -0.0000000000000000000000001, -1), brown),
         
         #Creando el tercer helado.
-        Sphere(V3(1.1, 0.45,-7), 0.4, white),
+        Sphere(V3(1.1, 0.5,-7), 0.4, white),
         Triangle(V3(0.1, 0.1, -1), V3(0.1, 0.3, -1), V3(0.2, 0.15, -1), brown),
 
         #Creando el cuarto helado.
-        Sphere(V3(0.15, 0.3,-7), 0.4, yellow),
-        Triangle(V3(-0.1, 0.2, -1), V3(0, 0.4, -1), V3(0.01, 0.15, -1), brown),
+        Sphere(V3(0.3, -0.3,-7), 0.4, yellow),
+        Triangle(V3(0, 0, -1), V3(0, 0.25, -1), V3(0.1, -0.001, -1), brown),
+
+        #Creando el quinto helado.
+        Sphere(V3(-0.6, 0.7,-7), 0.4, light_green),
+        Triangle(V3(-0.1, 0.1, -1), V3(-0.1, 0.4, -1), V3(-0.2, 0.15, -1), brown),
+
+        #Creando el sexto helado.
+        Sphere(V3(-2.5, 0.4,-7), 0.4, red),
+        Triangle(V3(-0.4, 0.1, -1), V3(-0.4, 0.3, -1), V3(-0.3, 0.1, -1), brown),
     ]
 
     c1.light = Light(V3(0, 1, 0), 1, color(255, 255, 255)) #Creando la luz.
